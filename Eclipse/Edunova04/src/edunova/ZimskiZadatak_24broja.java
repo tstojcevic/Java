@@ -9,7 +9,7 @@ public class ZimskiZadatak_24broja {
 //		Kreirati program koji unosi 24 broja, ispisuje njihov zbroj, najmanji i  najveći uneseni broj
 
 		
-		int niz[] = new int[4];
+		int niz[] = new int[24];
 		
 		int zbroj = 0;
 
