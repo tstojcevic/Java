@@ -61,7 +61,6 @@ public class CiklicnaMatrica {
 
 				System.out.print(matrica[i][j] + " \t ");
 
-
 	}
 	System.out.println();
 
