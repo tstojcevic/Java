@@ -14,7 +14,7 @@ public class CiklicnaMatrica {
 
 		int red = Integer.parseInt(JOptionPane.showInputDialog("Unesite broj redova"));
 
-		int matrica[][] = new int[stupac][red];
+		int matrica[][] = new int[red][stupac];
 
 		int prviStupac = 0;
 		int zadnjiStupac = stupac - 1;
