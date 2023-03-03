@@ -8,7 +8,7 @@ package stojcevic;
  *
  * @author Korisnik
  */
-public class StojcevicAplikacija {
+public class Start {
 
     public static void main(String[] args) {
         
