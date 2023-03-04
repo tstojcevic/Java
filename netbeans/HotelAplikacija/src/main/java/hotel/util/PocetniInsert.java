@@ -13,5 +13,5 @@ import org.hibernate.Session;
 public class PocetniInsert {
     
     Session session = HibernateUtil.getSession();
-    
+      
 }
