@@ -1,7 +1,9 @@
-package stojcevic.model;
+package hotel.model;
 
+import jakarta.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
 public class RadnoMjesto extends Entitet {
 	
 	private String naziv;

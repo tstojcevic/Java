@@ -1,11 +1,16 @@
-package stojcevic.model;
+package hotel.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Djelatnik extends Entitet {
 
 	private String ime;
 	private String prezime;
 	private String brojUgovora;
 	private String OIB;
+        @ManyToOne
 	private RadnoMjesto radnoMjesto;
 
 	public Djelatnik() {

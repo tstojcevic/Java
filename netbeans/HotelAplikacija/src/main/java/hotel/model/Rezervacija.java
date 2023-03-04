@@ -1,9 +1,13 @@
-package stojcevic.model;
+package hotel.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Rezervacija extends Entitet {
 
 	private Date datumPrijave;
@@ -11,8 +15,11 @@ public class Rezervacija extends Entitet {
 	private int brojGostiju;
 	private String brojRezervacije;
 	private int brojSmjestajnihJedinica;
+        @ManyToOne
 	private Gost gost;
+        @ManyToMany
 	private List<Djelatnik> djelatnici;
+        @ManyToMany
 	private List<Smjestaj> smjestaji;
 
 	public Rezervacija() {

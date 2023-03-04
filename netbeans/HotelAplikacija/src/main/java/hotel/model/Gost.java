@@ -1,5 +1,8 @@
-package stojcevic.model;
+package hotel.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Gost extends Entitet {
 
 	private String ime;
