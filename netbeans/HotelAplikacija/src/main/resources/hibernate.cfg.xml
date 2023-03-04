@@ -5,7 +5,7 @@
 <!-- Version 8 MySQL hiberante-cfg.xml example for Hibernate 5 -->
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.driver_class">org.maridb.jdbc.Driver</property>
+    <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
     <property name="connection.url">jdbc:mariadb://localhost/Hotelhib</property>
     <property name="dialect">org.hibernate.dialect.MariaDBDialect</property>
     <property name="connection.username">root</property>
@@ -17,6 +17,10 @@
     <property name="hbm2ddl.auto">update</property>
     
     <mapping class="stojcevic.model.Gost" />
+    <mapping class="stojcevic.model.RadnoMjesto" />
+    <mapping class="stojcevic.model.Smjestaj" />
+    <mapping class="stojcevic.model.Djelatnik" />
+    <mapping class="stojcevic.model.Rezervacija" />
     
     
   </session-factory>
