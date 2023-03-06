@@ -16,11 +16,11 @@
     <property name="format_sql">true</property>
     <property name="hbm2ddl.auto">update</property>
     
-    <mapping class="stojcevic.model.Gost" />
-    <mapping class="stojcevic.model.RadnoMjesto" />
-    <mapping class="stojcevic.model.Smjestaj" />
-    <mapping class="stojcevic.model.Djelatnik" />
-    <mapping class="stojcevic.model.Rezervacija" />
+    <mapping class="hotel.model.Gost" />
+    <mapping class="hotel.model.RadnoMjesto" />
+    <mapping class="hotel.model.Smjestaj" />
+    <mapping class="hotel.model.Djelatnik" />
+    <mapping class="hotel.model.Rezervacija" />
     
     
   </session-factory>
