@@ -27,7 +27,6 @@ public class PocetniInsert {
     private static final int BROJ_SMJESTAJA = 20;
     private static final int BROJ_DJELATNIKA = 20;
     private static final int BROJ_REZERVACIJA = 25;
-    
 
     private Faker faker;
     private List<Gost> gosti;
@@ -84,30 +83,27 @@ public class PocetniInsert {
             rm.setNaziv(faker.job().position());
             rm.setPlaca(new BigDecimal(faker.number().numberBetween(800, 2500)));
             rm.setSmjenskiRad(faker.bool().bool());
-            
+
             session.persist(rm);
             radna_mjesta.add(rm);
         }
 
     }
-    
-    
+
     private void kreirajSmjestaje() {
-        
+
         Smjestaj s;
-        for (int i = 0; i < BROJ_SMJESTAJA; i++){
-            s =new Smjestaj();
+        for (int i = 0; i < BROJ_SMJESTAJA; i++) {
+            s = new Smjestaj();
             s.setVrsta(faker.toString().toString());
             s.setBrojKreveta(faker.number().numberBetween(1, 3));
             s.setCijena(new BigDecimal(faker.number().numberBetween(80, 200)));
             s.setRaspolozivost(faker.bool().bool());
-            
+
             session.persist(s);
             smjestaji.add(s);
         }
     }
-    
-    
 
     private void kreirajDjelatnike() {
 
@@ -118,7 +114,7 @@ public class PocetniInsert {
             d.setPrezime(faker.name().lastName());
             d.setBrojUgovora(faker.number().toString());
             d.setOIB(Alati.dovuciOib());
-            d.setRadnoMjesto(radna_mjesta.get(sb(0,BROJ_RADNIH_MJESTA-1)));
+            d.setRadnoMjesto(radna_mjesta.get(sb(0, BROJ_RADNIH_MJESTA - 1)));
 
             session.persist(d);
             djelatnici.add(d);
@@ -126,39 +122,40 @@ public class PocetniInsert {
     }
 
     private void kreirajRezervacije() {
-        
+
         Rezervacija r;
         List<Djelatnik> d;
         List<Smjestaj> s;
-        
-        for (int i = 0; i < BROJ_REZERVACIJA; i++){
+
+        for (int i = 0; i < BROJ_REZERVACIJA; i++) {
             r = new Rezervacija();
             r.setDatumPrijave(faker.date().birthday());
             r.setDatumOdjave(faker.date().birthday());
             r.setBrojGostiju(faker.number().numberBetween(1, 6));
             r.setBrojRezervacije(faker.number().toString());
             r.setBrojSmjestajnihJedinica(faker.number().numberBetween(1, 20));
-            r.setGost(gosti.get(sb(0, BROJ_GOSTIJU-1)));
+            r.setGost(gosti.get(sb(0, BROJ_GOSTIJU - 1)));
             d = new ArrayList<>();
             s = new ArrayList<>();
-            
-            for (int y = 0;y<sb(1, 3);y++){
-                d.add(djelatnici.get(sb(0,BROJ_DJELATNIKA-1)));
+
+            for (int y = 0; y < sb(1, 3); y++) {
+                d.add(djelatnici.get(sb(0, BROJ_DJELATNIKA - 1)));
             }
-            
-            for (int x = 0;x<sb(1, 20);x++){
-                s.add(smjestaji.get(sb(0,BROJ_SMJESTAJA-1)));
+
+            for (int x = 0; x < sb(1, 20); x++) {
+                s.add(smjestaji.get(sb(0, BROJ_SMJESTAJA - 1)));
             }
-            
+
             r.setDjelatnici(d);
             r.setSmjestaji(s);
-            
+
             session.persist(r);
-            
+            rezervacije.add(r);
+
         }
     }
 
-    private int sb(int min, int max){
+    private int sb(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 

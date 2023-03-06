@@ -5,6 +5,7 @@
 package hotel;
 
 import hotel.util.HibernateUtil;
+import hotel.util.PocetniInsert;
 
 /**
  *
@@ -14,7 +15,9 @@ public class Start {
 
     public static void main(String[] args) {
         
-        HibernateUtil.getSession();
+//        HibernateUtil.getSession();
+
+            new PocetniInsert();
         
         
         
