@@ -5,6 +5,7 @@
 package hotel.util;
 
 import com.github.javafaker.Faker;
+import hotel.model.Djelatnik;
 import hotel.model.Gost;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,12 @@ import org.hibernate.Session;
  */
 public class PocetniInsert {
     
-    private static final int BROJ_GOSTIJU = 20;
+    private static final int BROJ_GOSTIJU = 50;
+    private static final int BROJ_DJELATNIKA = 20;
     
     private Faker faker;
     private List<Gost> gosti;
+    private List<Djelatnik> djelatnici;
     
     private Session session;
 
@@ -27,11 +30,14 @@ public class PocetniInsert {
         
         faker = new Faker();
         gosti = new ArrayList<>();
+        djelatnici = new ArrayList<>();
+        
         
         session = HibernateUtil.getSession();
         session.beginTransaction();
         
         kreirajGoste();
+        kreirajDjelatnike();
         
         session.getTransaction().commit();
     }
@@ -51,6 +57,21 @@ public class PocetniInsert {
             gosti.add(g);
         }
         
+    }
+
+    private void kreirajDjelatnike() {
+        
+        Djelatnik d;
+        for (int i = 0; i < BROJ_DJELATNIKA; i++){
+            d=new Djelatnik();
+            d.setIme(faker.name().firstName());
+            d.setPrezime(faker.name().lastName());
+            d.setBrojUgovora(faker.number().toString());
+            d.setOIB(Alati.dovuciOib());
+            
+            session.persist(d);
+            djelatnici.add(d);
+        }
     }
     
     
