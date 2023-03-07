@@ -40,11 +40,33 @@ public abstract class Obrada<T extends Entitet>{
         persist();
     
     }
+    
+    public void update() throws HotelException{
+        kontrolaPromjena();
+        persist();
+    }
+    
+    public void delete() throws HotelException{
+        kontrolaBrisanje();
+        session.beginTransaction();
+        session.remove(entitet);
+        session.getTransaction().commit();
+    }
 
     private void persist() {
         session.beginTransaction();
         session.persist(entitet);
         session.getTransaction().commit();
     }
+
+    public T getEntitet() {
+        return entitet;
+    }
+
+    public void setEntitet(T entitet) {
+        this.entitet = entitet;
+    }
+    
+    
     
 }
