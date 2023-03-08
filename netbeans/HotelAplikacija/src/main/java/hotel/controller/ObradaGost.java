@@ -32,7 +32,7 @@ public class ObradaGost extends Obrada<Gost>{
 
     @Override
     protected void kontrolaPromjena() throws HotelException {
-        kontrolaImeNull();
+            kontrolaImeNull();
             kontrolaImeBroj();
             kontrolaImeMinimalnaDuzina();
             kontrolaImeMaksimalnaDuzina();
