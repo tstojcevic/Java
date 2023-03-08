@@ -5,6 +5,7 @@
 package hotel.controller;
 
 import hotel.model.Djelatnik;
+import hotel.util.HotelException;
 import java.util.List;
 
 /**
@@ -17,6 +18,27 @@ public class ObradaDjelatnik extends Obrada<Djelatnik>{
     public List<Djelatnik> read() {
     return session.createQuery("from Djelatnik", Djelatnik.class).list();
     }
+
+    @Override
+    protected void kontrolaUnos() throws HotelException {
+        kontrolaIme();
+        kontrolaPrezime();
+        kontrolaBrojUgovora();
+        kontrolaOIB();
+        kontrolaRadnoMjesto();
+    }
+
+    @Override
+    protected void kontrolaPromjena() throws HotelException {
+        
+    }
+
+    @Override
+    protected void kontrolaBrisanje() throws HotelException {
+        
+    }
+    
+    
     
     
     
