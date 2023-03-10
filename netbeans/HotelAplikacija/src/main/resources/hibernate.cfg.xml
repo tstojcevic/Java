@@ -21,6 +21,7 @@
     <mapping class="hotel.model.Smjestaj" />
     <mapping class="hotel.model.Djelatnik" />
     <mapping class="hotel.model.Rezervacija" />
+    <mapping class="hotel.model.Operater" />
     
     
   </session-factory>
