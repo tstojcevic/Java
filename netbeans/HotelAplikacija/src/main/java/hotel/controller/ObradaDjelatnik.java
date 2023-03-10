@@ -21,11 +21,11 @@ public class ObradaDjelatnik extends Obrada<Djelatnik>{
 
     @Override
     protected void kontrolaUnos() throws HotelException {
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaBrojUgovora();
-        kontrolaOIB();
-        kontrolaRadnoMjesto();
+//        kontrolaIme();
+//        kontrolaPrezime();
+//        kontrolaBrojUgovora();
+//        kontrolaOIB();
+//        kontrolaRadnoMjesto();
     }
 
     @Override
