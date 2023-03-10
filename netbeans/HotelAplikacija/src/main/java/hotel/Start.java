@@ -4,8 +4,9 @@
 
 package hotel;
 
-import hotel.util.HibernateUtil;
-import hotel.util.PocetniInsert;
+import hotel.view.SplashScreen;
+
+
 
 /**
  *
@@ -15,9 +16,7 @@ public class Start {
 
     public static void main(String[] args) {
         
-//        HibernateUtil.getSession();
-
-            new PocetniInsert();
+        new SplashScreen().setVisible(true);
         
         
         
