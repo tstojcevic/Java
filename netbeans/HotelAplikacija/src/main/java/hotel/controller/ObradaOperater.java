@@ -6,6 +6,7 @@ package hotel.controller;
 
 import hotel.model.Operater;
 import hotel.util.HotelException;
+import jakarta.persistence.NoResultException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,8 +36,23 @@ public class ObradaOperater extends Obrada<Operater>{
         try {
             create();
         } catch (HotelException ex) {
-            Logger.getLogger(ObradaOperater.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getPoruka());
         }
+    }
+    
+    public Operater autoriziraj (String email, char[] lozinka){
+        Operater o;
+        try {
+            o = session.createQuery("from Operater o where o.email:=email", Operater.class).setParameter("email", email).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        
+        if(BCrypt.checkpw(new String(lozinka), new String(o.getLozinka()))){
+            return o;
+        }
+        
+        return null;
     }
 
     @Override
