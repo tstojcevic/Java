@@ -81,7 +81,7 @@ public class ProzorLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Lozinka");
 
-        pswLozinka.setText("stojcevic");
+        pswLozinka.setText("hotel");
         pswLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 pswLozinkaKeyPressed(evt);
