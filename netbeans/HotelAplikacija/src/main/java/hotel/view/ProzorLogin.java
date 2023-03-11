@@ -45,6 +45,8 @@ public class ProzorLogin extends javax.swing.JFrame {
             return;
         }
         
+        Aplikacija.OPERATER=o;
+        
         new ProzorIzbornik().setVisible(true);
         dispose();
         

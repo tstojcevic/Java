@@ -4,6 +4,8 @@
  */
 package hotel.util;
 
+import hotel.model.Operater;
+
 /**
  *
  * @author Korisnik
@@ -11,5 +13,6 @@ package hotel.util;
 public class Aplikacija {
     
     public static final String NAZIV_APP="Hotel";
+    public static Operater OPERATER;
     
 }
