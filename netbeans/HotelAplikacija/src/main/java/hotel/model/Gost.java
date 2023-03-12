@@ -57,7 +57,7 @@ public class Gost extends Entitet {
 	
 	@Override
 	public String toString() {
-		return "ime: " + ime + "	 prezime: " + prezime + "  OIB: " + OIB + "  e-mail: " + email + "  kontakt telefon: " + kontakTelefon ;
+		return ime + " " + prezime;
 	}
 	
 }
