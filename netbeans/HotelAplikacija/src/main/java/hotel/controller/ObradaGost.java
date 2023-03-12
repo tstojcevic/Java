@@ -5,6 +5,7 @@
 package hotel.controller;
 
 import hotel.model.Gost;
+import hotel.model.Rezervacija;
 import hotel.util.Alati;
 import hotel.util.HotelException;
 import java.util.List;
@@ -55,7 +56,24 @@ public class ObradaGost extends Obrada<Gost> {
 
     @Override
     protected void kontrolaBrisanje() throws HotelException {
-
+        if(entitet.getRezervacije()!=null && !entitet.getRezervacije().isEmpty()){
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Gost ");
+            sb.append(entitet.getPrezime());
+            sb.append(" se ne može obrisati jer ima rezervacije:");
+            sb.append("\n");
+            int b= 0;
+            for(Rezervacija r : entitet.getRezervacije()){
+                sb.append(++b);
+                sb.append(". ");
+                sb.append(r.getBrojRezervacije());
+                sb.append("\n");
+            }
+            sb.append("--------");
+            
+            throw new HotelException(sb.toString());
+        }
     }
 
     private void kontrolaIme() throws HotelException {
