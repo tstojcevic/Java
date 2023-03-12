@@ -1,6 +1,8 @@
 package hotel.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Gost extends Entitet {
@@ -10,6 +12,9 @@ public class Gost extends Entitet {
 	private String OIB;
 	private String email;
 	private String kontakTelefon;
+        
+        @OneToMany(mappedBy = "gost")
+        private List<Rezervacija> rezervacije;
 	
 	
 	
@@ -54,6 +59,16 @@ public class Gost extends Entitet {
 	public void setKontakTelefon(String kontakTelefon) {
 		this.kontakTelefon = kontakTelefon;
 	}
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
+    }
+        
+        
 	
 	@Override
 	public String toString() {
