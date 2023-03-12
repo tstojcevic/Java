@@ -107,7 +107,7 @@ public class Rezervacija extends Entitet {
 	
 	@Override
 	public String toString() {
-		return "broj rezervacije: " + brojRezervacije + "( gost: " + gost.getIme()+ " " + gost.getPrezime() + " )";
+		return brojRezervacije;
 	}
 
 }
