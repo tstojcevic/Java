@@ -102,6 +102,11 @@ public class ProzorIzbornik extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Gosti");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("Radna mjesta");
@@ -165,6 +170,10 @@ public class ProzorIzbornik extends javax.swing.JFrame {
                 "O aplikaciji",
                 JOptionPane.INFORMATION_MESSAGE );
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        new ProzorGost().setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
  
 
