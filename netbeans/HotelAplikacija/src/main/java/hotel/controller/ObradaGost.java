@@ -47,8 +47,10 @@ public class ObradaGost extends Obrada<Gost> {
         kontrolaOIBNull();
 
         kontrolaEmailNull();
+        kontrolaEmailMinimalnaDuzina();
 
         kontrolaKontaktTelefonNull();
+        kontrolaKontaktTelefonZnak();
     }
 
     @Override
@@ -168,6 +170,7 @@ public class ObradaGost extends Obrada<Gost> {
 
     private void kontrolaEmail() throws HotelException {
         kontrolaEmailNull();
+        kontrolaEmailMinimalnaDuzina();
     }
 
     private void kontrolaEmailNull() throws HotelException {
@@ -175,14 +178,32 @@ public class ObradaGost extends Obrada<Gost> {
             throw new HotelException("Email mora biti unesen");
         }
     }
+    
+    private void kontrolaEmailMinimalnaDuzina() throws HotelException{
+        if (entitet.getEmail().trim().length() < 3) {
+            throw new HotelException("Email gosta može imati minimalno 3 znaka");
+        }
+    }
 
     private void kontrolaKontaktTelefon() throws HotelException {
         kontrolaKontaktTelefonNull();
+        kontrolaKontaktTelefonZnak();
     }
 
     private void kontrolaKontaktTelefonNull() throws HotelException {
         if (entitet.getKontakTelefon() == null) {
             throw new HotelException("Kontakt telefon mora biti unesen");
+        }
+    }
+    
+    private void kontrolaKontaktTelefonZnak() throws HotelException{
+        char[] z = entitet.getKontakTelefon().toCharArray();
+
+        for (char ch : z) {
+            if (Character.isAlphabetic(ch)) {
+                throw new HotelException("Unijeli ste znak umjesto broja");
+            }
+
         }
     }
 
