@@ -1,5 +1,7 @@
 package stojcevic;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class Pomocno {
@@ -17,6 +19,16 @@ public class Pomocno {
 				JOptionPane.showInternalMessageDialog(null, "Obavezan unos imena");
 			}
 		}
+	}
+	
+	private static int prebrojiZnakove(char znak, List<Character> ukupnoZnakova) {
+		int dupliZnak = 0;
+		for (char pojediniZnak : ukupnoZnakova) {
+			if (pojediniZnak == znak) {
+				dupliZnak++;
+			}
+		}
+		return dupliZnak;
 	}
 
 }
