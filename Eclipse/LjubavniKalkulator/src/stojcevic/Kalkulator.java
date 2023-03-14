@@ -25,7 +25,20 @@ public class Kalkulator {
 		
 		ime2 = Pomocno.Unos("Unesi drugo ime").replaceAll("\\s", "");
 		
+		imenaZajedno = ime1 + ime2;
 		
+		for (char znak : imenaZajedno.toCharArray()) {
+			nizZnakova.add(znak);
+		}
+		
+		for (char broj : nizZnakova) {
+			nizBrojeva.add(Pomocno.prebrojiZnakove(broj, nizZnakova));
+		}
+
+		System.out.print(ime1 + " i " + ime2 + " se vole ");
+		zbroji(nizBrojeva);
+		System.out.print("%");
+
 		
 	}
 
