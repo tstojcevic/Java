@@ -3,11 +3,17 @@ package stojcevic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 public class Kalkulator {
 	
 	public static void main(String[] args) {
 		
-		new Kalkulator();
+		try {
+			new Kalkulator();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Dogodila se greška");
+		}
 		
 	}
 	
@@ -36,10 +42,9 @@ public class Kalkulator {
 		}
 
 		System.out.print(ime1 + " i " + ime2 + " se vole ");
-		zbroji(nizBrojeva);
+		Pomocno.zbroj(nizBrojeva);
 		System.out.print("%");
 
-		
 	}
 
 }
