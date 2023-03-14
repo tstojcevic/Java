@@ -21,7 +21,7 @@ public class Pomocno {
 		}
 	}
 	
-	private static int prebrojiZnakove(char znak, List<Character> ukupnoZnakova) {
+	public static int prebrojiZnakove(char znak, List<Character> ukupnoZnakova) {
 		int dupliZnak = 0;
 		for (char pojediniZnak : ukupnoZnakova) {
 			if (pojediniZnak == znak) {
