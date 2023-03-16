@@ -12,7 +12,7 @@ public class RadnoMjesto extends Entitet {
 	private BigDecimal placa;
 	private boolean smjenskiRad;
         
-        @OneToMany(mappedBy = "djelatnik")
+        @OneToMany(mappedBy = "radnoMjesto")
         private List<Djelatnik> djelatnici;
 	
 	
