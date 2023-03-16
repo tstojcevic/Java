@@ -1,7 +1,9 @@
 package hotel.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class RadnoMjesto extends Entitet {
@@ -9,6 +11,9 @@ public class RadnoMjesto extends Entitet {
 	private String naziv;
 	private BigDecimal placa;
 	private boolean smjenskiRad;
+        
+        @OneToMany(mappedBy = "djelatnik")
+        private List<Djelatnik> djelatnici;
 	
 	
 	public RadnoMjesto() {
@@ -41,6 +46,14 @@ public class RadnoMjesto extends Entitet {
 	public void setSmjenskiRad(boolean smjenskiRad) {
 		this.smjenskiRad = smjenskiRad;
 	}
+
+    public List<Djelatnik> getDjelatnici() {
+        return djelatnici;
+    }
+
+    public void setDjelatnici(List<Djelatnik> djelatnici) {
+        this.djelatnici = djelatnici;
+    }
 	
 	
 	
