@@ -7,6 +7,7 @@ package hotel.controller;
 import hotel.model.Djelatnik;
 import hotel.model.RadnoMjesto;
 import hotel.util.HotelException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,7 +30,13 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
 
     @Override
     protected void kontrolaPromjena() throws HotelException {
-
+        kontrolaNazivNull();
+        kontrolaNazivBroj();
+        kontrolaNazivSadrziBroj();
+        
+        kontrolaPlacaNull();
+        
+        
     }
 
     @Override
@@ -94,10 +101,29 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
 
     private void kontrolaPlaca() throws HotelException {
         kontrolaPlacaNull();
+        
     }
+    
+    private void kontrolaPlacaNull() throws HotelException{
+        if(entitet.getPlaca()==null ||
+                entitet.getPlaca().compareTo(BigDecimal.ZERO)<=0 ||
+                entitet.getPlaca().compareTo(new BigDecimal(10000))==1){
+            throw new HotelException("Plaća mora biti postavljena, "
+                    + "veća od 0 i manja od 10000");
+        }
+    }
+    
+    
+    
 
     private void kontrolaSmjenskiRad() throws HotelException {
         kontrolaSmjenskiRadNull();
     }
+
+    private void kontrolaSmjenskiRadNull() throws HotelException{
+        
+    }
+
+    
 
 }
