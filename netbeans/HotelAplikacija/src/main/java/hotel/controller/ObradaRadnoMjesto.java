@@ -36,6 +36,7 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
         
         kontrolaPlacaNull();
         
+        kontrolaSmjenskiRadNull();
         
     }
 
@@ -121,6 +122,16 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
     }
 
     private void kontrolaSmjenskiRadNull() throws HotelException{
+        
+        String unos = null;
+        if (unos.equalsIgnoreCase("da")) {
+        
+    } else if (unos.equalsIgnoreCase("ne")) {
+        
+    } else {
+        System.out.println("Pogrešan unos. Unijeti 'da' ili 'ne'.");
+        
+    }
         
     }
 
