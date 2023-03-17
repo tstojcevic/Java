@@ -244,7 +244,16 @@ public class ProzorGost extends javax.swing.JFrame {
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        // TODO add your handling code here:
+        obrada.setEntitet(new Gost());
+        napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(
+                    getRootPane(), 
+                    ex.getPoruka());
+        }
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
