@@ -18,7 +18,7 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
 
     @Override
     public List<RadnoMjesto> read() {
-        return session.createQuery("from RadnoMjesto", RadnoMjesto.class).list();
+        return session.createQuery("from RadnoMjesto order by naziv", RadnoMjesto.class).list();
     }
 
     @Override
