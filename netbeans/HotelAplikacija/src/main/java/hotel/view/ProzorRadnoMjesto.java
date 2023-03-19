@@ -8,11 +8,13 @@ import hotel.controller.ObradaRadnoMjesto;
 import hotel.model.Djelatnik;
 import hotel.model.RadnoMjesto;
 import hotel.util.Aplikacija;
+import hotel.util.HotelException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -94,6 +96,11 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
         jScrollPane2.setViewportView(lstDjelatnici);
 
         btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
         btnDodaj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnDodajKeyPressed(evt);
@@ -101,8 +108,18 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
         });
 
         btnPromijeni.setText("Promijeni");
+        btnPromijeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromijeniActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,6 +202,63 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
         
         napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new RadnoMjesto());
+        napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(
+                    getRootPane(), 
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void btnPromijeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromijeniActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite radno mjesto");
+            return;
+        }
+        
+        napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromijeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+                JOptionPane.showMessageDialog(
+                        getRootPane(),
+                    "Prvo odaberite radno mjesto");
+            return;
+            }
+            
+            if(JOptionPane.showConfirmDialog(
+                    getRootPane(), 
+                    "Sigurno obrisati " + obrada.getEntitet().getNaziv()+ "?", 
+                    "Brisanje", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+                return;
+            }
+
+            try {
+            obrada.delete();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(
+                    getRootPane(),
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
 
 
