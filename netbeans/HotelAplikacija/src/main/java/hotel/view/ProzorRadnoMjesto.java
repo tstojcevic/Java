@@ -8,6 +8,7 @@ import hotel.controller.ObradaRadnoMjesto;
 import hotel.model.Djelatnik;
 import hotel.model.RadnoMjesto;
 import hotel.util.Aplikacija;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -231,6 +232,25 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
             btnObrisi.setVisible(true);
         }
     }
+    }
+    
+    private void napuniModel(){
+        var rm = obrada.getEntitet();
+        rm.setNaziv(txtNaziv.getText());
+        try {
+            rm.setPlaca(
+                    BigDecimal.valueOf(
+                    df.parse(
+                            txtPlaca.getText())
+                            .doubleValue()
+                    )
+            );
+        } catch (Exception e) {
+            rm.setPlaca(BigDecimal.ZERO);
+        }
+        
+        rm.setSmjenskiRad(chbSmjenskiRad.isSelected());
+        
     }
 }
 
