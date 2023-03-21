@@ -1,6 +1,8 @@
 package hotel.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import java.util.ArrayList;
@@ -20,6 +22,11 @@ public class Rezervacija extends Entitet {
         @ManyToMany
 	private List<Djelatnik> djelatnici;
         @ManyToMany
+        @JoinTable(name = "RezervacijaSmjestaj",
+            joinColumns = {
+                @JoinColumn(name = "rezervacija")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "smjestaj")})
 	private List<Smjestaj> smjestaji;
 
 	public Rezervacija() {
