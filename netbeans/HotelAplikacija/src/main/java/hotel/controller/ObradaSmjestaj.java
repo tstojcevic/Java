@@ -33,9 +33,9 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     protected void kontrolaPromjena() throws HotelException {
         kontrolaVrstaNull();
         
-         kontrolaCijenaNull();
+        kontrolaCijenaNull();
          
-        
+        kontrolaRaspolozivostNull();
         
     }
 
