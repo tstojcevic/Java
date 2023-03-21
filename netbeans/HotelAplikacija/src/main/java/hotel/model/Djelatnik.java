@@ -1,7 +1,10 @@
 package hotel.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Djelatnik extends Entitet {
@@ -12,6 +15,9 @@ public class Djelatnik extends Entitet {
 	private String OIB;
         @ManyToOne
 	private RadnoMjesto radnoMjesto;
+        
+        @ManyToMany(mappedBy = "djelatnici")
+    private List<Rezervacija> rezervacije = new ArrayList<>();
 
 	public Djelatnik() {
 		super();
@@ -66,6 +72,16 @@ public class Djelatnik extends Entitet {
 	public void setRadnoMjesto(RadnoMjesto radnoMjesto) {
 		this.radnoMjesto = radnoMjesto;
 	}
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
+    }
+        
+        
 
 	@Override
 	public String toString() {
