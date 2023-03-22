@@ -33,6 +33,8 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     protected void kontrolaPromjena() throws HotelException {
         kontrolaVrstaNull();
         
+        kontrolaBrojKrevetaNull();
+        
         kontrolaCijenaNull();
          
         kontrolaRaspolozivostNull();
@@ -74,8 +76,10 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     }
     
     private void kontrolaBrojKreveta() throws HotelException {
-        //kontrolaBrojKrevetaNull();
+        kontrolaBrojKrevetaNull();
     }
+    
+    
 
     private void kontrolaCijena() throws HotelException{
         kontrolaCijenaNull();
@@ -106,6 +110,11 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     }
         
     }
+
+    private void kontrolaBrojKrevetaNull() throws HotelException{
+        if (entitet.getBrojKreveta()== 0) {
+            throw new HotelException("Broj kreveta mora biti odabran");
+    }
     
- 
+    }
 }
