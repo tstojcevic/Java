@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Korisnik
  */
-public class ProzorRadnoMjesto extends javax.swing.JFrame {
+public class ProzorRadnoMjesto extends javax.swing.JFrame implements HotelViewSucelje{
     
     private ObradaRadnoMjesto obrada;
     private DecimalFormat df;
@@ -42,7 +42,7 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
         ucitaj();
     }
     
-    private void ucitaj(){
+    public void ucitaj(){
         DefaultListModel<RadnoMjesto> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
@@ -279,7 +279,7 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
     private javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 
-    private void napuniView() {
+    public void napuniView() {
         var rm = obrada.getEntitet();
         txtNaziv.setText(rm.getNaziv());
         try {
@@ -308,7 +308,7 @@ public class ProzorRadnoMjesto extends javax.swing.JFrame {
     }
     }
     
-    private void napuniModel(){
+    public void napuniModel(){
         var rm = obrada.getEntitet();
         rm.setNaziv(txtNaziv.getText());
         try {

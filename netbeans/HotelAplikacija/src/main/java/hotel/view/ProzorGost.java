@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author Korisnik
  */
-public class ProzorGost extends javax.swing.JFrame {
+public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
     
     private ObradaGost obrada;
 
@@ -34,7 +34,7 @@ public class ProzorGost extends javax.swing.JFrame {
         ucitaj();
     }
     
-    private void ucitaj(){
+    public void ucitaj(){
         DefaultListModel<Gost> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
@@ -284,7 +284,7 @@ public class ProzorGost extends javax.swing.JFrame {
             
     }//GEN-LAST:event_btnObrišiActionPerformed
 
-    private void napuniView(){
+    public void napuniView(){
         var g = obrada.getEntitet();
         txtIme.setText(g.getIme());
         txtPrezime.setText(g.getPrezime());
@@ -305,7 +305,7 @@ public class ProzorGost extends javax.swing.JFrame {
         }
     }
     
-    private void napuniModel(){
+    public void napuniModel(){
         var g = obrada.getEntitet();
         g.setIme(txtIme.getText());
         g.setPrezime(txtPrezime.getText());
