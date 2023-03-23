@@ -20,6 +20,20 @@ public class ObradaSmjestaj extends Obrada<Smjestaj>{
     public List<Smjestaj> read() {
         return session.createQuery("from Smjestaj order by vrsta", Smjestaj.class).list();
     }
+    
+    public List<Smjestaj> read(String uvjet){
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+        return session.createQuery(" from Smjestaj "
+                + " where concat(vrsta,' ',brojkreveta,' ',cijena,' ',raspolozivost) "
+                + " like :uvjet "
+                + " order by vrsta ",
+                Smjestaj.class).setParameter("uvjet", uvjet)
+                .setMaxResults(10)
+                .list();
+    }
+    
+    
 
     @Override
     protected void kontrolaUnos() throws HotelException {
