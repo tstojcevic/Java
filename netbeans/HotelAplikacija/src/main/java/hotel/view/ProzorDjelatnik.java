@@ -5,11 +5,13 @@
 package hotel.view;
 
 import hotel.controller.ObradaDjelatnik;
+import hotel.controller.ObradaRadnoMjesto;
 import hotel.model.Djelatnik;
 import hotel.model.RadnoMjesto;
 import hotel.util.Alati;
 import hotel.util.HotelException;
 import java.awt.event.KeyEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -17,6 +19,9 @@ import javax.swing.JOptionPane;
  *
  * @author Korisnik
  */
+
+//potrebno popraviti prikaz radnog mjesta za pojedinog djelatnika
+
 public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSucelje{
     
     private ObradaDjelatnik obrada;
@@ -28,11 +33,23 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
         initComponents();
         obrada = new ObradaDjelatnik();
     }
+    
+    private void ucitajRadnaMjesta(){
+        DefaultComboBoxModel<RadnoMjesto> m = new DefaultComboBoxModel<>();
+        RadnoMjesto rm = new RadnoMjesto();
+        rm.setSifra(0);
+        rm.setNaziv("Nije odabrano");
+        m.addElement(rm);
+        m.addAll(new ObradaRadnoMjesto().read());
+        cmbRadnaMjesta.setModel(m);
+        cmbRadnaMjesta.repaint();
+        
+    }
 
     @Override
     public void ucitaj() {
         DefaultListModel<Djelatnik> d = new DefaultListModel<>();
-        d.addAll(obrada.read(txtUvjet.getText()));
+        d.addAll(obrada.read(txtUvjet.getText(),chbTraziOdPocetkaImena.isSelected()));
         lstPodaci.setModel(d);
         lstPodaci.repaint();
     }
@@ -44,7 +61,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
         d.setPrezime(txtPrezime.getText());
         d.setBrojUgovora(txtBrojUgovora.getText());
         d.setOIB(txtOIB.getText());
-        d.setRadnoMjesto((RadnoMjesto) cmbRadnoMjesto.getSelectedItem());
+        d.setRadnoMjesto((RadnoMjesto) cmbRadnaMjesta.getSelectedItem());
     }
 
     @Override
@@ -54,7 +71,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
         txtPrezime.setText(d.getPrezime());
         txtBrojUgovora.setText(d.getBrojUgovora());
         txtOIB.setText(d.getOIB());
-        cmbRadnoMjesto.setSelectedItem(d.getRadnoMjesto());
+        cmbRadnaMjesta.setSelectedItem(d.getRadnoMjesto());
         
         btnObrisi.setVisible(false);
         if(d.getRadnoMjesto()==null || d.getRadnoMjesto().equals("")){
@@ -87,12 +104,13 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
         txtBrojUgovora = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtOIB = new javax.swing.JTextField();
-        cmbRadnoMjesto = new javax.swing.JComboBox<>();
+        cmbRadnaMjesta = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         btnDovuciOIB = new javax.swing.JButton();
         btnDodaj = new javax.swing.JButton();
         btnPromijeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
+        chbTraziOdPocetkaImena = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,6 +184,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
             }
         });
 
+        chbTraziOdPocetkaImena.setText("Trazi od početka imena");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,11 +193,13 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtUvjet)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(chbTraziOdPocetkaImena, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -199,7 +221,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(cmbRadnoMjesto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbRadnaMjesta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDodaj)
@@ -208,7 +230,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(btnObrisi)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,9 +240,9 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
                     .addComponent(txtUvjet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
@@ -239,15 +261,20 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbRadnoMjesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbRadnaMjesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDodaj)
                             .addComponent(btnPromijeni))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnObrisi))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                        .addComponent(btnObrisi)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(chbTraziOdPocetkaImena)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -277,7 +304,6 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
         napuniModel();
         try {
             obrada.create();
-            txtUvjet.setText(obrada.getEntitet().getPrezime());
             ucitaj();
         } catch (HotelException ex) {
             JOptionPane.showMessageDialog(getRootPane(),
@@ -353,7 +379,8 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnPromijeni;
     private javax.swing.JButton btnTrazi;
-    private javax.swing.JComboBox<RadnoMjesto> cmbRadnoMjesto;
+    private javax.swing.JCheckBox chbTraziOdPocetkaImena;
+    private javax.swing.JComboBox<RadnoMjesto> cmbRadnaMjesta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
