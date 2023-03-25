@@ -40,7 +40,7 @@ public class ObradaDjelatnik extends Obrada<Djelatnik>{
             uvjet = "%" + uvjet + "%";
         }
         
-       return session.createQuery("from Polaznik "
+       return session.createQuery("from Djelatnik "
                + " where concat(ime,' ',prezime,' ',ime) "
                + " like :uvjet "
                + " order by prezime, ime ", 
