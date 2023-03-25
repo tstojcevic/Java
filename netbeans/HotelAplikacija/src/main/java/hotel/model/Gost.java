@@ -11,7 +11,7 @@ public class Gost extends Entitet {
 	private String prezime;
 	private String OIB;
 	private String email;
-	private String kontakTelefon;
+	private String kontaktTelefon;
         
         @OneToMany(mappedBy = "gost")
         private List<Rezervacija> rezervacije;
@@ -27,7 +27,7 @@ public class Gost extends Entitet {
 		this.prezime = prezime;
 		OIB = oIB;
 		this.email = email;
-		this.kontakTelefon = kontakTelefon;
+		this.kontaktTelefon = kontakTelefon;
 	}
 	public String getIme() {
 		return ime;
@@ -54,10 +54,10 @@ public class Gost extends Entitet {
 		this.email = email;
 	}
 	public String getKontakTelefon() {
-		return kontakTelefon;
+		return kontaktTelefon;
 	}
 	public void setKontakTelefon(String kontakTelefon) {
-		this.kontakTelefon = kontakTelefon;
+		this.kontaktTelefon = kontakTelefon;
 	}
 
     public List<Rezervacija> getRezervacije() {
