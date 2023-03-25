@@ -18,7 +18,19 @@ public class ObradaGost extends Obrada<Gost> {
 
     @Override
     public List<Gost> read() {
-        return session.createQuery("from Gost order by ime", Gost.class).list();
+        return session.createQuery("from Gost order by prezime", Gost.class).list();
+    }
+    
+    public List<Gost> read(String uvjet){
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+        return session.createQuery(" from Gost "
+                + " where concat(ime,' ',prezime,' ',OIB,' ',email,' ',kontaktTelefon) "
+                + " like :uvjet "
+                + " order by prezime ",
+                Gost.class).setParameter("uvjet", uvjet)
+                .setMaxResults(10)
+                .list();
     }
 
     @Override
