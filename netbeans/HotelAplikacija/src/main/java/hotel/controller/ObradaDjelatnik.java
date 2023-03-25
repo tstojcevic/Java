@@ -16,7 +16,38 @@ public class ObradaDjelatnik extends Obrada<Djelatnik>{
 
     @Override
     public List<Djelatnik> read() {
-    return session.createQuery("from Djelatnik", Djelatnik.class).list();
+    return session.createQuery("from Djelatnik order by ime, prezime", Djelatnik.class).list();
+    }
+    
+    public List<Djelatnik> read(String uvjet){
+        uvjet=uvjet.trim();
+        uvjet = "%" + uvjet + "%";
+        return session.createQuery(" from Djelatnik "
+                + " where concat(ime,' ',prezime,' ',brojUgovora,' ',OIB,' ',radnoMjesto) "
+                + " like :uvjet "
+                + " order by ime, prezime ",
+                Djelatnik.class).setParameter("uvjet", uvjet)
+                .setMaxResults(10)
+                .list();
+    }
+    
+    public List<Djelatnik> read(String uvjet, 
+            boolean traziOdPocetkaImena) {
+        uvjet=uvjet.trim();
+        if(traziOdPocetkaImena){
+            uvjet = uvjet + "%";
+        }else{
+            uvjet = "%" + uvjet + "%";
+        }
+        
+       return session.createQuery("from Polaznik "
+               + " where concat(ime,' ',prezime,' ',ime) "
+               + " like :uvjet "
+               + " order by prezime, ime ", 
+               Djelatnik.class)
+               .setParameter("uvjet", uvjet)
+               .setMaxResults(12)
+               .list();
     }
 
     @Override
