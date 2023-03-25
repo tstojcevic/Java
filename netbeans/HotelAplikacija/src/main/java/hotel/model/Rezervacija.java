@@ -20,14 +20,14 @@ public class Rezervacija extends Entitet {
         @ManyToOne
 	private Gost gost;
         @ManyToMany
-        @JoinTable(name = "RezervacijaDjelatnik",
+        @JoinTable(name = "Rezervacija_Djelatnik",
             joinColumns = {
                 @JoinColumn(name = "rezervacija")},
             inverseJoinColumns = {
                 @JoinColumn(name = "djelatnik")})
 	private List<Djelatnik> djelatnici;
         @ManyToMany
-        @JoinTable(name = "RezervacijaSmjestaj",
+        @JoinTable(name = "Rezervacija_Smjestaj",
             joinColumns = {
                 @JoinColumn(name = "rezervacija")},
             inverseJoinColumns = {
