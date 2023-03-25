@@ -7,6 +7,7 @@ package hotel.view;
 import hotel.controller.ObradaGost;
 import hotel.model.Gost;
 import hotel.model.Rezervacija;
+import hotel.util.Alati;
 import hotel.util.Aplikacija;
 import hotel.util.HotelException;
 import java.util.logging.Level;
@@ -69,6 +70,7 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
         jScrollPane2 = new javax.swing.JScrollPane();
         lstRezervacije = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
+        btnDovuciOIB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,6 +131,13 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
 
         jLabel6.setText("Rezervacije na gostu");
 
+        btnDovuciOIB.setText("O");
+        btnDovuciOIB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDovuciOIBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +156,10 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
                         .addComponent(txtIme, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtPrezime, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDovuciOIB, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(txtOIB, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +188,9 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(btnDovuciOIB))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtOIB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,7 +209,7 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
                                 .addComponent(btnObriši))
                             .addComponent(jScrollPane2)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,6 +298,10 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
             
     }//GEN-LAST:event_btnObrišiActionPerformed
 
+    private void btnDovuciOIBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDovuciOIBActionPerformed
+        txtOIB.setText(Alati.dovuciOib());
+    }//GEN-LAST:event_btnDovuciOIBActionPerformed
+
     public void napuniView(){
         var g = obrada.getEntitet();
         txtIme.setText(g.getIme());
@@ -316,6 +334,7 @@ public class ProzorGost extends javax.swing.JFrame implements HotelViewSucelje{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDovuciOIB;
     private javax.swing.JButton btnObriši;
     private javax.swing.JButton btnPromijeni;
     private javax.swing.JLabel jLabel1;
