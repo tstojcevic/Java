@@ -4,22 +4,67 @@
  */
 package hotel.view;
 
+import hotel.controller.ObradaDjelatnik;
 import hotel.model.Djelatnik;
+import hotel.model.RadnoMjesto;
 import hotel.util.Alati;
+import hotel.util.HotelException;
 import java.awt.event.KeyEvent;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Korisnik
  */
-public class ProzorDjelatnik extends javax.swing.JFrame {
+public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSucelje{
+    
+    private ObradaDjelatnik obrada;
 
     /**
      * Creates new form ProzorDjelatnik
      */
     public ProzorDjelatnik() {
         initComponents();
+        obrada = new ObradaDjelatnik();
     }
+
+    @Override
+    public void ucitaj() {
+        DefaultListModel<Djelatnik> d = new DefaultListModel<>();
+        d.addAll(obrada.read(txtUvjet.getText()));
+        lstPodaci.setModel(d);
+        lstPodaci.repaint();
+    }
+
+    @Override
+    public void napuniModel() {
+        var d = obrada.getEntitet();
+        d.setIme(txtIme.getText());
+        d.setPrezime(txtPrezime.getText());
+        d.setBrojUgovora(txtBrojUgovora.getText());
+        d.setOIB(txtOIB.getText());
+        d.setRadnoMjesto((RadnoMjesto) cmbRadnoMjesto.getSelectedItem());
+    }
+
+    @Override
+    public void napuniView() {
+        var d = obrada.getEntitet();
+        txtIme.setText(d.getIme());
+        txtPrezime.setText(d.getPrezime());
+        txtBrojUgovora.setText(d.getBrojUgovora());
+        txtOIB.setText(d.getOIB());
+        cmbRadnoMjesto.setSelectedItem(d.getRadnoMjesto());
+        
+        btnObrisi.setVisible(false);
+        if(d.getRadnoMjesto()==null || d.getRadnoMjesto().equals("")){
+            btnObrisi.setVisible(true);
+        }
+    }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,6 +96,11 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        txtUvjet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUvjetActionPerformed(evt);
+            }
+        });
         txtUvjet.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUvjetKeyPressed(evt);
@@ -65,6 +115,11 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         });
 
         lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstPodaci);
 
         jLabel1.setText("Ime");
@@ -98,8 +153,18 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
         });
 
         btnPromijeni.setText("Promijeni");
+        btnPromijeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromijeniActionPerformed(evt);
+            }
+        });
 
         btnObrisi.setText("Obriši");
+        btnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,8 +273,77 @@ public class ProzorDjelatnik extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBrojUgovoraActionPerformed
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        // TODO add your handling code here:
+        obrada.setEntitet(new Djelatnik());
+        napuniModel();
+        try {
+            obrada.create();
+            txtUvjet.setText(obrada.getEntitet().getPrezime());
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    ex.getPoruka());
+        }
     }//GEN-LAST:event_btnDodajActionPerformed
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if (evt.getValueIsAdjusting()){
+            return;
+        }
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+        napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void txtUvjetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUvjetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUvjetActionPerformed
+
+    private void btnPromijeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromijeniActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(getRootPane(),
+                    "Prvo odaberite djelatnika");
+            return;
+        }
+        
+        napuniModel();
+        try {
+            obrada.update();
+            txtUvjet.setText(obrada.getEntitet().getPrezime());
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromijeniActionPerformed
+
+    private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(
+                    getRootPane(), 
+                    "Prvo odaberite smještaj");
+            return;
+        }
+        
+        if(JOptionPane.showConfirmDialog(
+                getRootPane(),
+                "Sigurno obrisati " + obrada.getEntitet().getPrezime()+ "?",
+                "Brisanje",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+            return;
+        }
+        
+        try {
+            obrada.delete();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(
+                    getRootPane(),
+                    ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnObrisiActionPerformed
 
   
 
