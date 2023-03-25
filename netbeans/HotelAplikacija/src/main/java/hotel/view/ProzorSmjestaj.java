@@ -318,6 +318,11 @@ public class ProzorSmjestaj extends javax.swing.JFrame implements HotelViewSucel
         }
         
         chbRaspolozivost.setSelected(s.isRaspolozivost());
+        
+        btnObrisi.setVisible(false);
+        if(s.getRezervacije()==null || s.getRezervacije().isEmpty()){
+            btnObrisi.setVisible(true);
+        }
     }
 
     @Override
