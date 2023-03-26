@@ -72,7 +72,7 @@ public class Smjestaj extends Entitet {
     @Override
     public String toString() {
 
-        return "vrsta: " + vrsta + "	broj kreveta: " + brojKreveta + "	cijena: " + cijena + "	raspoloživost: " + raspolozivost;
+        return vrsta;
     }
 
 }
