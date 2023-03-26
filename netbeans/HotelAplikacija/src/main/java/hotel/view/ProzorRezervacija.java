@@ -4,6 +4,8 @@
  */
 package hotel.view;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import hotel.controller.ObradaGost;
 import hotel.controller.ObradaRezervacija;
 import hotel.controller.ObradaSmjestaj;
 import hotel.model.Djelatnik;
@@ -11,6 +13,7 @@ import hotel.model.Gost;
 import hotel.model.Rezervacija;
 import hotel.model.Smjestaj;
 import hotel.util.Aplikacija;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -32,7 +35,41 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         setTitle(Aplikacija.NAZIV_APP + ": " + 
                 Aplikacija.OPERATER.getImePrezime() + 
                 ": Rezervacije");
+        definirajDatumPrijave();
+        definirajDatumOdjave();
         ucitajFilterSmjestaji();
+        ucitajGoste();
+        ucitaj();
+    }
+    
+    private void definirajDatumPrijave(){
+            DatePickerSettings dps = 
+                new DatePickerSettings(new Locale("hr","HR"));
+       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+       dps.setTranslationClear("Očisti");
+       dps.setTranslationToday("Danas");
+       dpDatumOdjave.setSettings(dps);
+    }
+    
+    private void definirajDatumOdjave(){
+            DatePickerSettings dps = 
+                new DatePickerSettings(new Locale("hr","HR"));
+       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+       dps.setTranslationClear("Očisti");
+       dps.setTranslationToday("Danas");
+       dpDatumOdjave.setSettings(dps);
+    }
+    
+    private void ucitajGoste(){
+        DefaultComboBoxModel<Gost> m = new DefaultComboBoxModel<>();
+        Gost g = new Gost();
+        g.setSifra(0);
+        g.setIme(g.getIme());
+        g.setPrezime(g.getPrezime());
+        m.addElement(g);
+        m.addAll(new ObradaGost().read());
+        cmbGost.setModel(m);
+        cmbGost.repaint();
     }
     
     private void ucitajFilterSmjestaji(){
@@ -63,11 +100,11 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         jLabel3 = new javax.swing.JLabel();
         txtBrojSmjestajnihJedinica = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        cmbSmjestaji = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        cmbDjelatnici = new javax.swing.JComboBox<>();
         cmbGost = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        dpDatumPrijave = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel6 = new javax.swing.JLabel();
+        dpDatumOdjave = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,9 +130,9 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
         jLabel4.setText("Gost");
 
-        jLabel5.setText("Smještaj");
+        jLabel5.setText("Datum prijave");
 
-        jLabel6.setText("Djelatnik");
+        jLabel6.setText("Datum odjave");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,26 +144,27 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                     .addComponent(cmbFilterSmjestaji, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbSmjestaji, 0, 146, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtBrojRezervacije)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBrojGostiju)
-                    .addComponent(jLabel3)
-                    .addComponent(txtBrojSmjestajnihJedinica)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(txtBrojRezervacije)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBrojGostiju)
+                        .addComponent(jLabel3)
+                        .addComponent(txtBrojSmjestajnihJedinica)
+                        .addComponent(jLabel4)
+                        .addComponent(cmbGost, 0, 146, Short.MAX_VALUE))
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbDjelatnici, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbGost, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dpDatumPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(476, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -146,15 +184,15 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbSmjestaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
+                        .addComponent(dpDatumPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbDjelatnici, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbFilterSmjestaji, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(171, Short.MAX_VALUE))
         );
 
@@ -202,8 +240,8 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
             txtBrojSmjestajnihJedinica.setText("");
         }
         cmbGost.setSelectedItem(e.getGost());
-        cmbSmjestaji.setSelectedItem(e.getSmjestaji());
-        cmbDjelatnici.setSelectedItem(e.getDjelatnici());
+        
+        
 
     }
 
@@ -231,10 +269,10 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Djelatnik> cmbDjelatnici;
     private javax.swing.JComboBox<Smjestaj> cmbFilterSmjestaji;
     private javax.swing.JComboBox<Gost> cmbGost;
-    private javax.swing.JComboBox<Smjestaj> cmbSmjestaji;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumOdjave;
+    private com.github.lgooddatepicker.components.DatePicker dpDatumPrijave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
