@@ -95,7 +95,7 @@ public class PocetniInsert {
         Smjestaj s;
         for (int i = 0; i < BROJ_SMJESTAJA; i++) {
             s = new Smjestaj();
-            s.setVrsta(faker.toString().toString());
+            s.setVrsta(faker.rockBand().name());
             s.setBrojKreveta(faker.number().numberBetween(1, 3));
             s.setCijena(new BigDecimal(faker.number().numberBetween(80, 200)));
             s.setRaspolozivost(faker.bool().bool());
