@@ -4,17 +4,44 @@
  */
 package hotel.view;
 
+import hotel.controller.ObradaRezervacija;
+import hotel.controller.ObradaSmjestaj;
+import hotel.model.Djelatnik;
+import hotel.model.Gost;
+import hotel.model.Rezervacija;
+import hotel.model.Smjestaj;
+import hotel.util.Aplikacija;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Korisnik
  */
-public class ProzorRezervacija extends javax.swing.JFrame {
+public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSucelje{
+    
+    private ObradaRezervacija obrada;
 
     /**
      * Creates new form ProzorRezervacija
      */
     public ProzorRezervacija() {
         initComponents();
+        obrada = new ObradaRezervacija();
+        
+        setTitle(Aplikacija.NAZIV_APP + ": " + 
+                Aplikacija.OPERATER.getImePrezime() + 
+                ": Rezervacije");
+        ucitajFilterSmjestaji();
+    }
+    
+    private void ucitajFilterSmjestaji(){
+        DefaultComboBoxModel<Smjestaj> m = new DefaultComboBoxModel<>();
+        m.addAll(new ObradaSmjestaj().read());
+        cmbFilterSmjestaji.setModel(m);
+        cmbFilterSmjestaji.repaint();
+        cmbFilterSmjestaji.setSelectedIndex(0);
+        
     }
 
     /**
@@ -26,25 +53,198 @@ public class ProzorRezervacija extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmbFilterSmjestaji = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstPodaci = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtBrojRezervacije = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtBrojGostiju = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtBrojSmjestajnihJedinica = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cmbSmjestaji = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cmbDjelatnici = new javax.swing.JComboBox<>();
+        cmbGost = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        cmbFilterSmjestaji.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbFilterSmjestajiItemStateChanged(evt);
+            }
+        });
+
+        lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstPodaciValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(lstPodaci);
+
+        jLabel1.setText("Broj rezervacije");
+
+        jLabel2.setText("Broj gostiju");
+
+        jLabel3.setText("Broj smještajnih jedinica");
+
+        jLabel4.setText("Gost");
+
+        jLabel5.setText("Smještaj");
+
+        jLabel6.setText("Djelatnik");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbFilterSmjestaji, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbSmjestaji, 0, 146, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtBrojRezervacije)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBrojGostiju)
+                    .addComponent(jLabel3)
+                    .addComponent(txtBrojSmjestajnihJedinica)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbDjelatnici, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbGost, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBrojRezervacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBrojGostiju, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBrojSmjestajnihJedinica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(12, 12, 12)
+                        .addComponent(cmbGost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbSmjestaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbDjelatnici, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbFilterSmjestaji, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void cmbFilterSmjestajiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilterSmjestajiItemStateChanged
+        ucitaj();
+    }//GEN-LAST:event_cmbFilterSmjestajiItemStateChanged
+
+    private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
+        if(evt.getValueIsAdjusting()){
+            return;
+        }
+        if(lstPodaci.getSelectedValue()==null){
+            return;
+        }
+
+        obrada.setEntitet(lstPodaci.getSelectedValue());
+
+        napuniView();
+    }//GEN-LAST:event_lstPodaciValueChanged
+
+    @Override
+    public void ucitaj() {
+        DefaultListModel<Rezervacija> m = new DefaultListModel<>();
+        m.addAll(obrada.read((Smjestaj)cmbFilterSmjestaji.getSelectedItem()));
+        lstPodaci.setModel(m);
+        lstPodaci.repaint();
+    }
+
+    @Override
+    public void napuniView() {
+        var e = obrada.getEntitet();
+        txtBrojRezervacije.setText(e.getBrojRezervacije());
+        try {
+            txtBrojGostiju.setText(String.valueOf(e.getBrojGostiju()));
+        } catch (Exception ex) {
+            txtBrojGostiju.setText("");
+        }
+        try {
+            txtBrojSmjestajnihJedinica.setText(String.valueOf(e.getBrojSmjestajnihJedinica()));
+        } catch (Exception ex) {
+            txtBrojSmjestajnihJedinica.setText("");
+        }
+        cmbGost.setSelectedItem(e.getGost());
+        cmbSmjestaji.setSelectedItem(e.getSmjestaji());
+        cmbDjelatnici.setSelectedItem(e.getDjelatnici());
+
+    }
+
+    @Override
+    public void napuniModel() {
+        var e = obrada.getEntitet();
+        e.setBrojRezervacije(txtBrojRezervacije.getText());
+        try {
+            e.setBrojGostiju(Integer.parseInt(txtBrojGostiju.getText()));
+        } catch (Exception ex) {
+            e.setBrojGostiju(0);
+        }
+        try {
+            e.setBrojSmjestajnihJedinica(Integer.parseInt(txtBrojSmjestajnihJedinica.getText()));
+        } catch (Exception ex) {
+            e.setBrojSmjestajnihJedinica(0);
+        }
+        e.setGost((Gost) cmbGost.getSelectedItem());
+        
+        
+        
+    }
+
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Djelatnik> cmbDjelatnici;
+    private javax.swing.JComboBox<Smjestaj> cmbFilterSmjestaji;
+    private javax.swing.JComboBox<Gost> cmbGost;
+    private javax.swing.JComboBox<Smjestaj> cmbSmjestaji;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Rezervacija> lstPodaci;
+    private javax.swing.JTextField txtBrojGostiju;
+    private javax.swing.JTextField txtBrojRezervacije;
+    private javax.swing.JTextField txtBrojSmjestajnihJedinica;
     // End of variables declaration//GEN-END:variables
 }
