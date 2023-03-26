@@ -22,10 +22,10 @@ public class ObradaRezervacija extends Obrada<Rezervacija>{
     
     public List<Rezervacija> read(Smjestaj s){
         return session.createQuery("from Rezervacija "
-        + " where smjestaj=:smjestaj "
+        + " where Smjestaj=:Smjestaj "
         + " order by brojRezervacije desc ",
         Rezervacija.class)
-        .setParameter("smjestaj", s)
+        .setParameter("Smjestaj", s)
         .list();
               
     }
