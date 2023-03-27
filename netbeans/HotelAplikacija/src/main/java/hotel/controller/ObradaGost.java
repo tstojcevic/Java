@@ -20,9 +20,9 @@ public class ObradaGost extends Obrada<Gost> {
     public List<Gost> read() {
         return session.createQuery("from Gost order by prezime", Gost.class).list();
     }
-    
-    public List<Gost> read(String uvjet){
-        uvjet=uvjet.trim();
+
+    public List<Gost> read(String uvjet) {
+        uvjet = uvjet.trim();
         uvjet = "%" + uvjet + "%";
         return session.createQuery(" from Gost "
                 + " where concat(ime,' ',prezime,' ',OIB,' ',email,' ',kontaktTelefon) "
@@ -68,22 +68,22 @@ public class ObradaGost extends Obrada<Gost> {
 
     @Override
     protected void kontrolaBrisanje() throws HotelException {
-        if(entitet.getRezervacije()!=null && !entitet.getRezervacije().isEmpty()){
-            
+        if (entitet.getRezervacije() != null && !entitet.getRezervacije().isEmpty()) {
+
             StringBuilder sb = new StringBuilder();
             sb.append("Gost ");
             sb.append(entitet.getPrezime());
             sb.append(" se ne može obrisati jer ima rezervacije:");
             sb.append("\n");
-            int b= 0;
-            for(Rezervacija r : entitet.getRezervacije()){
+            int b = 0;
+            for (Rezervacija r : entitet.getRezervacije()) {
                 sb.append(++b);
                 sb.append(". ");
                 sb.append(r.getBrojRezervacije());
                 sb.append("\n");
             }
             sb.append("--------");
-            
+
             throw new HotelException(sb.toString());
         }
     }
@@ -208,8 +208,8 @@ public class ObradaGost extends Obrada<Gost> {
             throw new HotelException("Email mora biti unesen");
         }
     }
-    
-    private void kontrolaEmailMinimalnaDuzina() throws HotelException{
+
+    private void kontrolaEmailMinimalnaDuzina() throws HotelException {
         if (entitet.getEmail().trim().length() < 3) {
             throw new HotelException("Email gosta može imati minimalno 3 znaka");
         }
@@ -225,8 +225,8 @@ public class ObradaGost extends Obrada<Gost> {
             throw new HotelException("Kontakt telefon mora biti unesen");
         }
     }
-    
-    private void kontrolaKontaktTelefonZnak() throws HotelException{
+
+    private void kontrolaKontaktTelefonZnak() throws HotelException {
         char[] z = entitet.getKontakTelefon().toCharArray();
 
         for (char ch : z) {

@@ -21,8 +21,8 @@ import javax.swing.DefaultListModel;
  *
  * @author Korisnik
  */
-public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSucelje{
-    
+public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSucelje {
+
     private ObradaRezervacija obrada;
 
     /**
@@ -31,36 +31,36 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     public ProzorRezervacija() {
         initComponents();
         obrada = new ObradaRezervacija();
-        
-        setTitle(Aplikacija.NAZIV_APP + ": " + 
-                Aplikacija.OPERATER.getImePrezime() + 
-                ": Rezervacije");
+
+        setTitle(Aplikacija.NAZIV_APP + ": "
+                + Aplikacija.OPERATER.getImePrezime()
+                + ": Rezervacije");
         definirajDatumPrijave();
         definirajDatumOdjave();
         ucitajFilterSmjestaji();
         ucitajGoste();
         ucitaj();
     }
-    
-    private void definirajDatumPrijave(){
-            DatePickerSettings dps = 
-                new DatePickerSettings(new Locale("hr","HR"));
-       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
-       dps.setTranslationClear("Očisti");
-       dps.setTranslationToday("Danas");
-       dpDatumOdjave.setSettings(dps);
+
+    private void definirajDatumPrijave() {
+        DatePickerSettings dps
+                = new DatePickerSettings(new Locale("hr", "HR"));
+        dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+        dps.setTranslationClear("Očisti");
+        dps.setTranslationToday("Danas");
+        dpDatumOdjave.setSettings(dps);
     }
-    
-    private void definirajDatumOdjave(){
-            DatePickerSettings dps = 
-                new DatePickerSettings(new Locale("hr","HR"));
-       dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
-       dps.setTranslationClear("Očisti");
-       dps.setTranslationToday("Danas");
-       dpDatumOdjave.setSettings(dps);
+
+    private void definirajDatumOdjave() {
+        DatePickerSettings dps
+                = new DatePickerSettings(new Locale("hr", "HR"));
+        dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+        dps.setTranslationClear("Očisti");
+        dps.setTranslationToday("Danas");
+        dpDatumOdjave.setSettings(dps);
     }
-    
-    private void ucitajGoste(){
+
+    private void ucitajGoste() {
         DefaultComboBoxModel<Gost> m = new DefaultComboBoxModel<>();
         Gost g = new Gost();
         g.setSifra(0);
@@ -71,14 +71,14 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         cmbGost.setModel(m);
         cmbGost.repaint();
     }
-    
-    private void ucitajFilterSmjestaji(){
+
+    private void ucitajFilterSmjestaji() {
         DefaultComboBoxModel<Smjestaj> m = new DefaultComboBoxModel<>();
         m.addAll(new ObradaSmjestaj().read());
         cmbFilterSmjestaji.setModel(m);
         cmbFilterSmjestaji.repaint();
         cmbFilterSmjestaji.setSelectedIndex(0);
-        
+
     }
 
     /**
@@ -205,10 +205,10 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     }//GEN-LAST:event_cmbFilterSmjestajiItemStateChanged
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
-        if(evt.getValueIsAdjusting()){
+        if (evt.getValueIsAdjusting()) {
             return;
         }
-        if(lstPodaci.getSelectedValue()==null){
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
 
@@ -220,7 +220,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     @Override
     public void ucitaj() {
         DefaultListModel<Rezervacija> m = new DefaultListModel<>();
-        m.addAll(obrada.read((Smjestaj)cmbFilterSmjestaji.getSelectedItem()));
+        m.addAll(obrada.read((Smjestaj) cmbFilterSmjestaji.getSelectedItem()));
         lstPodaci.setModel(m);
         lstPodaci.repaint();
     }
@@ -240,8 +240,6 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
             txtBrojSmjestajnihJedinica.setText("");
         }
         cmbGost.setSelectedItem(e.getGost());
-        
-        
 
     }
 
@@ -260,13 +258,9 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
             e.setBrojSmjestajnihJedinica(0);
         }
         e.setGost((Gost) cmbGost.getSelectedItem());
-        
-        
-        
+
     }
 
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Smjestaj> cmbFilterSmjestaji;

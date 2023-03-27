@@ -33,11 +33,11 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
         kontrolaNazivNull();
         kontrolaNazivBroj();
         kontrolaNazivSadrziBroj();
-        
+
         kontrolaPlacaNull();
-        
+
         kontrolaSmjenskiRadNull();
-        
+
     }
 
     @Override
@@ -102,39 +102,34 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
 
     private void kontrolaPlaca() throws HotelException {
         kontrolaPlacaNull();
-        
+
     }
-    
-    private void kontrolaPlacaNull() throws HotelException{
-        if(entitet.getPlaca()==null ||
-                entitet.getPlaca().compareTo(BigDecimal.ZERO)<=0 ||
-                entitet.getPlaca().compareTo(new BigDecimal(10000))==1){
+
+    private void kontrolaPlacaNull() throws HotelException {
+        if (entitet.getPlaca() == null
+                || entitet.getPlaca().compareTo(BigDecimal.ZERO) <= 0
+                || entitet.getPlaca().compareTo(new BigDecimal(10000)) == 1) {
             throw new HotelException("Plaća mora biti postavljena, "
                     + "veća od 0 i manja od 10000");
         }
     }
-    
-    
-    
 
     private void kontrolaSmjenskiRad() throws HotelException {
         kontrolaSmjenskiRadNull();
     }
 
-    private void kontrolaSmjenskiRadNull() throws HotelException{
+    private void kontrolaSmjenskiRadNull() throws HotelException {
         //ne valja, potrebno doraditi
         String unos = null;
         if (unos.equalsIgnoreCase("da")) {
-        
-    } else if (unos.equalsIgnoreCase("ne")) {
-        
-    } else {
-        System.out.println("Pogrešan unos. Unijeti 'da' ili 'ne'.");
-        
-    }
-        
-    }
 
-    
+        } else if (unos.equalsIgnoreCase("ne")) {
+
+        } else {
+            System.out.println("Pogrešan unos. Unijeti 'da' ili 'ne'.");
+
+        }
+
+    }
 
 }
