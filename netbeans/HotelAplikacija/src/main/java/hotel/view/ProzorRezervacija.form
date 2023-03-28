@@ -26,7 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="cmbFilterSmjestaji" max="32767" attributes="0"/>
+                  <Component id="cmbFilterGosti" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -85,7 +85,7 @@
                       <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="cmbFilterSmjestaji" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="cmbFilterGosti" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
@@ -96,17 +96,17 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JComboBox" name="cmbFilterSmjestaji">
+    <Component class="javax.swing.JComboBox" name="cmbFilterGosti">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbFilterSmjestajiItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbFilterGostiItemStateChanged"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Smjestaj&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Gost&gt;"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

@@ -4,6 +4,7 @@
  */
 package hotel.controller;
 
+import hotel.model.Gost;
 import hotel.model.Rezervacija;
 import hotel.model.Smjestaj;
 import hotel.util.HotelException;
@@ -20,12 +21,12 @@ public class ObradaRezervacija extends Obrada<Rezervacija> {
         return session.createQuery("from Rezervacija", Rezervacija.class).list();
     }
 
-    public List<Rezervacija> read(Smjestaj s) {
+    public List<Rezervacija> read(Gost g) {
         return session.createQuery("from Rezervacija "
-                + " where Smjestaj=:Smjestaj "
+                + " where Gost=:Gost "
                 + " order by brojRezervacije desc ",
                 Rezervacija.class)
-                .setParameter("Smjestaj", s)
+                .setParameter("Gost", g)
                 .list();
 
     }

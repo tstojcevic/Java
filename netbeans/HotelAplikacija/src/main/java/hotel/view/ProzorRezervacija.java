@@ -39,7 +39,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                 + ": Rezervacije");
         definirajDatumPrijave();
         definirajDatumOdjave();
-        ucitajFilterSmjestaji();
+        ucitajFilterGosti();
         ucitajGoste();
         ucitaj();
     }
@@ -66,20 +66,20 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         DefaultComboBoxModel<Gost> m = new DefaultComboBoxModel<>();
         Gost g = new Gost();
         g.setSifra(0);
-        g.setIme(g.getIme());
-        g.setPrezime(g.getPrezime());
+        g.setIme("Nije");
+        g.setPrezime(" odabrano");
         m.addElement(g);
         m.addAll(new ObradaGost().read());
         cmbGost.setModel(m);
         cmbGost.repaint();
     }
 
-    private void ucitajFilterSmjestaji() {
-        DefaultComboBoxModel<Smjestaj> m = new DefaultComboBoxModel<>();
-        m.addAll(new ObradaSmjestaj().read());
-        cmbFilterSmjestaji.setModel(m);
-        cmbFilterSmjestaji.repaint();
-        cmbFilterSmjestaji.setSelectedIndex(0);
+    private void ucitajFilterGosti() {
+        DefaultComboBoxModel<Gost> m = new DefaultComboBoxModel<>();
+        m.addAll(new ObradaGost().read());
+        cmbFilterGosti.setModel(m);
+        cmbFilterGosti.repaint();
+        cmbFilterGosti.setSelectedIndex(0);
 
     }
 
@@ -92,7 +92,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmbFilterSmjestaji = new javax.swing.JComboBox<>();
+        cmbFilterGosti = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPodaci = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
@@ -111,9 +111,9 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        cmbFilterSmjestaji.addItemListener(new java.awt.event.ItemListener() {
+        cmbFilterGosti.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbFilterSmjestajiItemStateChanged(evt);
+                cmbFilterGostiItemStateChanged(evt);
             }
         });
 
@@ -151,7 +151,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbFilterSmjestaji, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbFilterGosti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +204,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                         .addComponent(btnDodaj)
                         .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbFilterSmjestaji, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbFilterGosti, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1)))
                 .addContainerGap())
@@ -214,9 +214,9 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbFilterSmjestajiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilterSmjestajiItemStateChanged
+    private void cmbFilterGostiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbFilterGostiItemStateChanged
         ucitaj();
-    }//GEN-LAST:event_cmbFilterSmjestajiItemStateChanged
+    }//GEN-LAST:event_cmbFilterGostiItemStateChanged
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
         if (evt.getValueIsAdjusting()) {
@@ -245,7 +245,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     @Override
     public void ucitaj() {
         DefaultListModel<Rezervacija> m = new DefaultListModel<>();
-        m.addAll(obrada.read((Smjestaj) cmbFilterSmjestaji.getSelectedItem()));
+        m.addAll(obrada.read((Gost) cmbFilterGosti.getSelectedItem()));
         lstPodaci.setModel(m);
         lstPodaci.repaint();
     }
@@ -289,7 +289,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
-    private javax.swing.JComboBox<Smjestaj> cmbFilterSmjestaji;
+    private javax.swing.JComboBox<Gost> cmbFilterGosti;
     private javax.swing.JComboBox<Gost> cmbGost;
     private com.github.lgooddatepicker.components.DatePicker dpDatumOdjave;
     private com.github.lgooddatepicker.components.DatePicker dpDatumPrijave;
