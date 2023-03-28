@@ -13,9 +13,11 @@ import hotel.model.Gost;
 import hotel.model.Rezervacija;
 import hotel.model.Smjestaj;
 import hotel.util.Aplikacija;
+import hotel.util.HotelException;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -105,6 +107,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         dpDatumPrijave = new com.github.lgooddatepicker.components.DatePicker();
         jLabel6 = new javax.swing.JLabel();
         dpDatumOdjave = new com.github.lgooddatepicker.components.DatePicker();
+        btnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -134,6 +137,13 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
         jLabel6.setText("Datum odjave");
 
+        btnDodaj.setText("Dodaj");
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,7 +167,8 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                     .addComponent(jLabel5)
                     .addComponent(dpDatumPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDodaj))
                 .addContainerGap(476, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,12 +199,15 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnDodaj)
+                        .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbFilterSmjestaji, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
 
         pack();
@@ -216,6 +230,17 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
         napuniView();
     }//GEN-LAST:event_lstPodaciValueChanged
+
+    private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
+        obrada.setEntitet(new Rezervacija());
+        napuniModel();
+        try {
+            obrada.create();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(getParent(), ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnDodajActionPerformed
 
     @Override
     public void ucitaj() {
@@ -263,6 +288,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodaj;
     private javax.swing.JComboBox<Smjestaj> cmbFilterSmjestaji;
     private javax.swing.JComboBox<Gost> cmbGost;
     private com.github.lgooddatepicker.components.DatePicker dpDatumOdjave;
