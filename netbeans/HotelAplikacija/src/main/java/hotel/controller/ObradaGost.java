@@ -72,6 +72,8 @@ public class ObradaGost extends Obrada<Gost> {
 
             StringBuilder sb = new StringBuilder();
             sb.append("Gost ");
+            sb.append(entitet.getIme());
+            sb.append(" ");
             sb.append(entitet.getPrezime());
             sb.append(" se ne može obrisati jer ima rezervacije:");
             sb.append("\n");
@@ -172,7 +174,7 @@ public class ObradaGost extends Obrada<Gost> {
     }
 
     private void kontrolaPrezimeMaksimalnaDuzina() throws HotelException {
-        if (entitet.getPrezime().trim().length() > 20) {
+        if (entitet.getPrezime().trim().length() > 30) {
             throw new HotelException("Prezime gosta može imati maksimalno 30 znakova");
         }
     }
