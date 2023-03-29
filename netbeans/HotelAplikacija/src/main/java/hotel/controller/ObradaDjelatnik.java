@@ -54,6 +54,11 @@ public class ObradaDjelatnik extends Obrada<Djelatnik> {
 
     @Override
     protected void kontrolaUnos() throws HotelException {
+       
+        if(entitet.getRadnoMjesto().getSifra()==0){
+            entitet.setRadnoMjesto(null);
+        }
+        
         kontrolaIme();
         kontrolaPrezime();
         kontrolaBrojUgovora();

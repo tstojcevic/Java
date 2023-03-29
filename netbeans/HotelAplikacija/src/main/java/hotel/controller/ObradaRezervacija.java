@@ -33,7 +33,10 @@ public class ObradaRezervacija extends Obrada<Rezervacija> {
 
     @Override
     protected void kontrolaUnos() throws HotelException {
-
+        if(entitet.getGost().getSifra()==0){
+            entitet.setGost(null);
+        }
+        
     }
 
     @Override
