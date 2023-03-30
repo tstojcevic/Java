@@ -112,6 +112,7 @@ public class ObradaSmjestaj extends Obrada<Smjestaj> {
 
     private void kontrolaCijena() throws HotelException {
         kontrolaCijenaNull();
+
     }
 
     private void kontrolaCijenaNull() throws HotelException {
@@ -128,10 +129,8 @@ public class ObradaSmjestaj extends Obrada<Smjestaj> {
     }
 
     private void kontrolaRaspolozivostNull() throws HotelException {
-       
-        //provjera kontrole
-        
-        String unos = null;
+
+        String unos = "";
         if (unos.equalsIgnoreCase("da")) {
 
         } else if (unos.equalsIgnoreCase("ne")) {
