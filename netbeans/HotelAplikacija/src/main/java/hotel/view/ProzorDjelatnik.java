@@ -9,6 +9,7 @@ import hotel.controller.ObradaRadnoMjesto;
 import hotel.model.Djelatnik;
 import hotel.model.RadnoMjesto;
 import hotel.util.Alati;
+import hotel.util.Aplikacija;
 import hotel.util.HotelException;
 import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -32,6 +33,11 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
     public ProzorDjelatnik() {
         initComponents();
         obrada = new ObradaDjelatnik();
+        obrada = new ObradaDjelatnik();
+        setTitle(Aplikacija.NAZIV_APP + ": " +
+                Aplikacija.OPERATER.getImePrezime() + 
+                ": Djelatnici");
+        ucitaj();
     }
     
     private void ucitajRadnaMjesta(){

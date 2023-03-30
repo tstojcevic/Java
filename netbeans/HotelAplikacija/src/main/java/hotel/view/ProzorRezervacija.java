@@ -314,7 +314,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         }
         
         DefaultListModel<Smjestaj> m = new DefaultListModel<>();
-        if(e.getSmjestaji()!=null){
+        if(e.getSmjestaji()!=null && !e.getSmjestaji().isEmpty()){
             m.addAll(e.getSmjestaji());
         }
         lstSmjestajiNaRezervaciji.setModel(m);

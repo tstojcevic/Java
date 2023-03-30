@@ -6,6 +6,7 @@ package hotel.view;
 
 import hotel.controller.ObradaSmjestaj;
 import hotel.model.Smjestaj;
+import hotel.util.Aplikacija;
 import hotel.util.HotelException;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
@@ -27,6 +28,10 @@ public class ProzorSmjestaj extends javax.swing.JFrame implements HotelViewSucel
     public ProzorSmjestaj() {
         initComponents();
         obrada = new ObradaSmjestaj();
+        setTitle(Aplikacija.NAZIV_APP + ": " +
+                Aplikacija.OPERATER.getImePrezime() + 
+                ": Smještaji");
+        ucitaj();
     }
 
     /**
@@ -335,7 +340,10 @@ public class ProzorSmjestaj extends javax.swing.JFrame implements HotelViewSucel
             s.setBrojKreveta(0);
         }
         try {
-            s.setCijena(BigDecimal.valueOf(df.parse(txtCijena.getText()).doubleValue()));
+            s.setCijena(BigDecimal.valueOf(
+                    df.parse(
+                            txtCijena.getText())
+                            .doubleValue()));
         } catch (Exception e) {
             s.setCijena(BigDecimal.ZERO);
         }
