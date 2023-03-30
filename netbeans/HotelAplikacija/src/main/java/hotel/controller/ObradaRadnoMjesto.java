@@ -119,10 +119,8 @@ public class ObradaRadnoMjesto extends Obrada<RadnoMjesto> {
     }
 
     private void kontrolaSmjenskiRadNull() throws HotelException {
-        
-        //ne valja, potrebno doraditi
-        
-        String unos = null;
+
+        String unos = "";
         if (unos.equalsIgnoreCase("da")) {
 
         } else if (unos.equalsIgnoreCase("ne")) {
