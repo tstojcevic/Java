@@ -14,6 +14,7 @@ import hotel.model.Rezervacija;
 import hotel.model.Smjestaj;
 import hotel.util.Aplikacija;
 import hotel.util.HotelException;
+import java.awt.event.KeyEvent;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -32,6 +33,7 @@ import javax.swing.JOptionPane;
 public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSucelje {
 
     private ObradaRezervacija obrada;
+    private ObradaSmjestaj obradaSmjestaj;
 
     /**
      * Creates new form ProzorRezervacija
@@ -39,7 +41,7 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     public ProzorRezervacija() {
         initComponents();
         obrada = new ObradaRezervacija();
-
+        obradaSmjestaj = new ObradaSmjestaj();
         setTitle(Aplikacija.NAZIV_APP + ": "
                 + Aplikacija.OPERATER.getImePrezime()
                 + ": Rezervacije");
@@ -117,6 +119,15 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstSmjestajiNaRezervaciji = new javax.swing.JList<>();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstSmjestajiUBazi = new javax.swing.JList<>();
+        txtUvjet2 = new javax.swing.JTextField();
+        btnTrazi = new javax.swing.JButton();
+        btnDodajPolaznika = new javax.swing.JButton();
+        btnObrisiPolaznika = new javax.swing.JButton();
+        btnPromijeni = new javax.swing.JButton();
+        btnObriši = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -157,6 +168,56 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
         jScrollPane2.setViewportView(lstSmjestajiNaRezervaciji);
 
+        jLabel8.setText("Smještaji u bazi");
+
+        jScrollPane3.setViewportView(lstSmjestajiUBazi);
+
+        txtUvjet2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUvjet2ActionPerformed(evt);
+            }
+        });
+        txtUvjet2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUvjet2KeyPressed(evt);
+            }
+        });
+
+        btnTrazi.setText("🔍");
+        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTraziActionPerformed(evt);
+            }
+        });
+
+        btnDodajPolaznika.setText("<<");
+        btnDodajPolaznika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajPolaznikaActionPerformed(evt);
+            }
+        });
+
+        btnObrisiPolaznika.setText(">>");
+        btnObrisiPolaznika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiPolaznikaActionPerformed(evt);
+            }
+        });
+
+        btnPromijeni.setText("Promijeni");
+        btnPromijeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromijeniActionPerformed(evt);
+            }
+        });
+
+        btnObriši.setText("Obriši");
+        btnObriši.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrišiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,27 +229,50 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDodaj)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1)
-                                .addComponent(txtBrojRezervacije)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtBrojGostiju)
-                                .addComponent(jLabel3)
-                                .addComponent(txtBrojSmjestajnihJedinica)
-                                .addComponent(jLabel4)
-                                .addComponent(cmbGost, 0, 146, Short.MAX_VALUE))
-                            .addComponent(jLabel5)
-                            .addComponent(dpDatumPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel1)
+                                        .addComponent(txtBrojRezervacije)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtBrojGostiju)
+                                        .addComponent(jLabel3)
+                                        .addComponent(txtBrojSmjestajnihJedinica)
+                                        .addComponent(jLabel4)
+                                        .addComponent(cmbGost, 0, 146, Short.MAX_VALUE))
+                                    .addComponent(jLabel5)
+                                    .addComponent(dpDatumPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(36, 36, 36))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnObriši, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(11, 11, 11)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(267, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDodajPolaznika, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnObrisiPolaznika, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDodaj)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPromijeni)))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtUvjet2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(btnTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,11 +280,12 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel7))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(txtBrojRezervacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,13 +308,31 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26)
-                        .addComponent(btnDodaj)
-                        .addGap(32, 32, 32))
+                                .addComponent(dpDatumOdjave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnDodaj)
+                                    .addComponent(btnPromijeni))
+                                .addGap(9, 9, 9)
+                                .addComponent(btnObriši))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtUvjet2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnTrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnDodajPolaznika)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnObrisiPolaznika)
+                                        .addGap(133, 133, 133))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbFilterGosti, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -269,6 +372,127 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void txtUvjet2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUvjet2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUvjet2ActionPerformed
+
+    private void txtUvjet2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjet2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            ucitajSmjestaje();
+        }
+    }//GEN-LAST:event_txtUvjet2KeyPressed
+
+    private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
+        ucitajSmjestaje();
+    }//GEN-LAST:event_btnTraziActionPerformed
+
+    private void btnDodajPolaznikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajPolaznikaActionPerformed
+
+        if(lstSmjestajiUBazi.getSelectedValuesList()==null
+            || lstSmjestajiUBazi.getSelectedValuesList().isEmpty()){
+            JOptionPane.showMessageDialog(getRootPane(),
+                "Prvo pronađite smještaj/e");
+            return;
+        }
+
+        if(lstSmjestajiNaRezervaciji.getModel()==null ||
+            !(lstSmjestajiNaRezervaciji.getModel() instanceof DefaultListModel<Smjestaj>)){
+            lstSmjestajiNaRezervaciji.setModel(new DefaultListModel<Smjestaj>());
+        }
+
+        DefaultListModel<Smjestaj> m =
+        (DefaultListModel<Smjestaj>) lstSmjestajiNaRezervaciji.getModel();
+
+        DefaultListModel<Smjestaj> smjestaji =
+        (DefaultListModel<Smjestaj>) lstSmjestajiNaRezervaciji.getModel();
+        boolean postoji;
+        for(Smjestaj sub : lstSmjestajiUBazi.getSelectedValuesList()){
+            postoji=false;
+            for(int i=0;i<smjestaji.getSize();i++){
+                if(sub.getSifra()==smjestaji.get(i).getSifra()){
+                    postoji=true;
+                    break;
+                }
+            }
+            if(!postoji){
+                smjestaji.addElement(sub);
+            }
+        }
+        lstSmjestajiNaRezervaciji.repaint();
+
+    }//GEN-LAST:event_btnDodajPolaznikaActionPerformed
+
+    private void btnObrisiPolaznikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiPolaznikaActionPerformed
+        if(lstSmjestajiNaRezervaciji.getSelectedValuesList()==null
+            || lstSmjestajiNaRezervaciji.getSelectedValuesList().isEmpty()){
+            JOptionPane.showMessageDialog(getRootPane(),
+                "Prvo odaberite smještaj u rezervaciji");
+            return;
+        }
+
+        DefaultListModel<Smjestaj> m =
+        (DefaultListModel<Smjestaj>) lstSmjestajiNaRezervaciji.getModel();
+
+        for(Smjestaj s : lstSmjestajiNaRezervaciji.getSelectedValuesList()){
+            m.removeElement(s);
+        }
+        lstSmjestajiNaRezervaciji.repaint();
+
+    }//GEN-LAST:event_btnObrisiPolaznikaActionPerformed
+
+    private void btnPromijeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromijeniActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(getRootPane(),
+                "Prvo odaberite rezervaciju");
+            return;
+        }
+
+        napuniModel();
+        try {
+            obrada.update();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(getRootPane(),
+                ex.getPoruka());
+        }
+    }//GEN-LAST:event_btnPromijeniActionPerformed
+
+    private void btnObrišiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrišiActionPerformed
+        if(lstPodaci.getSelectedValue()==null){
+            JOptionPane.showMessageDialog(
+                getRootPane(),
+                "Prvo odaberite rezervaciju");
+            return;
+        }
+
+        if(JOptionPane.showConfirmDialog(
+            getRootPane(),
+            "Sigurno obrisati " + obrada.getEntitet().getBrojRezervacije() + "?",
+            "Brisanje",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE)==JOptionPane.NO_OPTION){
+        return;
+        }
+
+        try {
+            obrada.delete();
+            ucitaj();
+        } catch (HotelException ex) {
+            JOptionPane.showMessageDialog(
+                getRootPane(),
+                ex.getPoruka());
+        }
+
+    }//GEN-LAST:event_btnObrišiActionPerformed
+
+    
+    private void ucitajSmjestaje(){
+        DefaultListModel<Smjestaj> m = new DefaultListModel<>();
+        m.addAll(obradaSmjestaj.read(txtUvjet2.getText().trim()));
+        lstSmjestajiUBazi.setModel(m);
+        lstSmjestajiUBazi.repaint();
+    }
+    
     @Override
     public void ucitaj() {
         DefaultListModel<Rezervacija> m = new DefaultListModel<>();
@@ -365,6 +589,11 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodajPolaznika;
+    private javax.swing.JButton btnObrisiPolaznika;
+    private javax.swing.JButton btnObriši;
+    private javax.swing.JButton btnPromijeni;
+    private javax.swing.JButton btnTrazi;
     private javax.swing.JComboBox<Gost> cmbFilterGosti;
     private javax.swing.JComboBox<Gost> cmbGost;
     private com.github.lgooddatepicker.components.DatePicker dpDatumOdjave;
@@ -376,12 +605,18 @@ public class ProzorRezervacija extends javax.swing.JFrame implements HotelViewSu
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<Rezervacija> lstPodaci;
     private javax.swing.JList<Smjestaj> lstSmjestajiNaRezervaciji;
+    private javax.swing.JList<Smjestaj> lstSmjestajiUBazi;
     private javax.swing.JTextField txtBrojGostiju;
     private javax.swing.JTextField txtBrojRezervacije;
     private javax.swing.JTextField txtBrojSmjestajnihJedinica;
+    private javax.swing.JTextField txtUvjet;
+    private javax.swing.JTextField txtUvjet1;
+    private javax.swing.JTextField txtUvjet2;
     // End of variables declaration//GEN-END:variables
 }
