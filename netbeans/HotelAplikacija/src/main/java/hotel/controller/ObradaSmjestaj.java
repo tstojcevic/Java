@@ -33,24 +33,7 @@ public class ObradaSmjestaj extends Obrada<Smjestaj> {
                 .list();
     }
 
-    public List<Smjestaj> read(String uvjet,
-            boolean traziOdPocetkaImena) {
-        uvjet = uvjet.trim();
-        if (traziOdPocetkaImena) {
-            uvjet = uvjet + "%";
-        } else {
-            uvjet = "%" + uvjet + "%";
-        }
-
-        return session.createQuery("from Polaznik "
-                + " where concat(ime,' ',prezime,' ',ime) "
-                + " like :uvjet "
-                + " order by prezime, ime ",
-                Smjestaj.class)
-                .setParameter("uvjet", uvjet)
-                .setMaxResults(12)
-                .list();
-    }
+    
 
     @Override
     protected void kontrolaUnos() throws HotelException {
