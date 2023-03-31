@@ -119,7 +119,7 @@ public class Rezervacija extends Entitet {
 	
 	@Override
 	public String toString() {
-		return brojRezervacije + " " + datumPrijave + " " + datumOdjave;
+		return brojRezervacije + ", " + datumPrijave + " - " + datumOdjave;
 	}
 
 }
