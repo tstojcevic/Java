@@ -11,6 +11,8 @@ import hotel.util.HotelException;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -31,6 +33,11 @@ public class ProzorSmjestaj extends javax.swing.JFrame implements HotelViewSucel
         setTitle(Aplikacija.NAZIV_APP + ": " +
                 Aplikacija.OPERATER.getImePrezime() + 
                 ": Smještaji");
+        DecimalFormatSymbols dfs = 
+                new DecimalFormatSymbols(
+                        new Locale("hr", "HR"));
+         df = new DecimalFormat("###,##0.00",dfs);
+        
         ucitaj();
     }
 
@@ -241,6 +248,8 @@ public class ProzorSmjestaj extends javax.swing.JFrame implements HotelViewSucel
                     "Prvo odaberite smještaj");
             return;
         }
+        
+        //obrada.setEntitet(lstPodaci.getSelectedValue());
         
         napuniModel();
         try {

@@ -101,7 +101,7 @@ public class ObradaSmjestaj extends Obrada<Smjestaj> {
     private void kontrolaCijenaNull() throws HotelException {
         if (entitet.getCijena() == null
                 || entitet.getCijena().compareTo(BigDecimal.ZERO) <= 0
-                || entitet.getCijena().compareTo(new BigDecimal(10000)) == 1) {
+                || entitet.getCijena().compareTo(new BigDecimal(10000)) >= 1) {
             throw new HotelException("Cijena mora biti postavljena, "
                     + "veća od 0 i manja od 10000");
         }

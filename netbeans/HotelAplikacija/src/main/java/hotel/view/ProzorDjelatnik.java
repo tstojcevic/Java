@@ -38,6 +38,7 @@ public class ProzorDjelatnik extends javax.swing.JFrame implements HotelViewSuce
                 Aplikacija.OPERATER.getImePrezime() + 
                 ": Djelatnici");
         ucitaj();
+        ucitajRadnaMjesta();
     }
     
     private void ucitajRadnaMjesta(){

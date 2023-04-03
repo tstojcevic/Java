@@ -23,7 +23,7 @@ public class ObradaRezervacija extends Obrada<Rezervacija> {
 
     public List<Rezervacija> read(Gost g) {
         return session.createQuery("from Rezervacija "
-                + " where Gost=:Gost "
+                + " where gost=:Gost "
                 + " order by brojRezervacije desc ",
                 Rezervacija.class)
                 .setParameter("Gost", g)
